@@ -14,8 +14,8 @@ function solution(arr) {
         })
         
         if (JSON.stringify(prevarr) === JSON.stringify(arr)) break;
-        answer++;
         prevarr = arr.slice();
+        answer += 1;
     }
     answer--;
     return answer;
