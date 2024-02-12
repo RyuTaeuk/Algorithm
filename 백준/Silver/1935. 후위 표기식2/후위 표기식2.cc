@@ -4,13 +4,33 @@
 
 using namespace std;
 
+double operate(double x, double y, char op) {
+	double ans;
+	if (op == '+') {
+		ans = x + y;
+	}
+	else if (op == '-') {
+		ans = x - y;
+	}
+	else if (op == '*') {
+		ans = x * y;
+	}
+	else if (op == '/') {
+		ans = x / y;
+	}
+	else {
+		printf("An error occured.\n");
+		ans = 0;
+	}
+	return ans;
+}
+
 int main() {
 	double nums[27];
-	stack<double> st;
+	double x, y, ans;
 	int n;
-	double ans = 0.0;
-	double x, y;
 	string q;
+	stack<double> st;
 
 	cin >> n;
 	cin >> q;
@@ -24,41 +44,14 @@ int main() {
 			st.push(nums[q[i] - 'A']);
 		}
 		else {
-			if (q[i] == '+') {
-				y = st.top();
-				st.pop();
-				x = st.top();
-				st.pop();
-				ans = x + y;
-				st.push(ans);
-			}
-			if (q[i] == '-') {
-				y = st.top();
-				st.pop();
-				x = st.top();
-				st.pop();
-				ans = x - y;
-				st.push(ans);
-			}
-			if (q[i] == '*') {
-				y = st.top();
-				st.pop();
-				x = st.top();
-				st.pop();
-				ans = x * y;
-				st.push(ans);
-			}
-			if (q[i] == '/') {
-				y = st.top();
-				st.pop();
-				x = st.top();
-				st.pop();
-				ans = (double)x / y;
-				st.push(ans);
-			}
+			y = st.top();
+			st.pop();
+			x = st.top();
+			st.pop();
+			ans = operate(x, y, q[i]);
+			st.push(ans);
 		}
 	}
-
 
 	printf("%.2f\n", ans);
 	return 0;
