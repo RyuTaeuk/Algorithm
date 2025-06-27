@@ -9,9 +9,9 @@ int main() {
     int n;
     cin >> n;
     if(n % 2 == 0) {
-        cout << "CY" << endl;
+        cout << "CY\n";
     } else {
-        cout << "SK" << endl;
+        cout << "SK\n";
     }
     return 0;
 }
