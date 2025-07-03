@@ -9,7 +9,7 @@ bool compare(vector<int> &v1, vector<int> &v2){
         return v1[3] > v2[3];
     else if(v1[1] == v2[1])
         return v1[2] > v2[2];
-    return v1[1] > v2[1];
+    else return v1[1] > v2[1];
 }
 
 int main() {
@@ -29,8 +29,12 @@ int main() {
 
     sort(countries.begin(), countries.end(), compare);
 
+    if(countries[0][0] == k) { //등수세기-1등 예외
+        cout << "1\n";
+        return 0;
+    }
     ranks[0] = 1;
-    for (int i=1; i<n; i++){ //등수세기
+    for (int i=1; i<n; i++){ 
         if(countries[i][0] == k) {
             if(countries[i-1][1] == countries[i][1]
             && countries[i-1][2] == countries[i][2]
@@ -39,7 +43,7 @@ int main() {
                 break;
             }
             else {
-                cout << i << '\n';
+                cout << i+1 << '\n';
                 break;
             }
         }
