@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -7,19 +6,15 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int N, X;
+    int N, X, tmp;
     cin >> N >> X;
-
-    vector<int> A(N);
     
     for(int i=0; i<N; i++){
-        cin >> A[i];
+        cin >> tmp;
+        if(tmp < X) cout << tmp << ' ';
     }
 
-    for(int i=0; i<N; i++){
-        if(A[i] < X) cout << A[i] << ' ';
-    }
     cout <<'\n';
-    
+
     return 0;
 }
