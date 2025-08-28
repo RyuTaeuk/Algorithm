@@ -1,58 +1,38 @@
-#include <iostream>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
-void editor(){
-    return;
-}
-
-int main(){
-    char c;
-    string s = "";
-    stack<char> st1, st2;
-    int m;
-
-    cin >> s;
-    cin >> m;
-
-    for (int i = 0; i < s.size(); i++){
-        st1.push(s[i]);
-    }
-
-    for (int i = 0; i<m; i++){
-        cin >> c;
-        if(c == 'L'){
-            if(!st1.empty()) {
-                st2.push(st1.top());
-                st1.pop();
+int main(void) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    string init;
+    cin >> init;
+    list<char> L;
+    for(auto c : init) L.push_back(c);
+    auto cursor = L.end();
+    int q;
+    cin >> q;
+    while(q--){
+        char op;
+        cin >> op;
+        if(op == 'P'){
+            char add;
+            cin >> add;
+            L.insert(cursor, add);
+        }
+        else if(op == 'L'){
+            if(cursor != L.begin()) cursor--;
+        }
+        else if (op == 'D'){
+            if(cursor != L.end()) cursor++;
+        }
+        else {
+            if(cursor != L.begin()){
+                cursor--;
+                cursor = L.erase(cursor);
             }
         }
-        else if(c == 'D'){
-            if(!st2.empty()){
-                st1.push(st2.top());
-                st2.pop();
-            }
-        }
-        else if(c == 'B'){
-            if(!st1.empty()){
-                st1.pop();
-            }
-        }
-        else if(c == 'P'){
-            cin >> c;
-            st1.push(c);
-        }
-        else break;
     }
+    for(auto c : L) cout << c;
 
-    while(!st1.empty()) {
-        st2.push(st1.top());
-        st1.pop();
-    }
-
-    while(!st2.empty()){
-        cout << st2.top();
-        st2.pop();
-    }
-    cout << "\n";
+    return 0;
 }
