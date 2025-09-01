@@ -1,40 +1,36 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int n, result = 0;
-int matrix[16];
 
-
-int checking(int idx) {
-    for (int j = 0; j < idx; j++) {
-        if (matrix[idx] == matrix[j] || idx - j == abs(matrix[idx] - matrix[j])) return 0;
-    }
-    return 1;
-}
-
-void searching(int idx) {
-    if (idx == n) {
+int arr[16];
+bool vis1[16], vis2[32], vis3[32];
+int n, result=0;
+void solution(int cnt){
+    if(cnt == n) {
         result++;
         return;
     }
 
-
-    for (int i = 0; i < n; i++) {
-            matrix[idx] = i;
-            //같은 행/대각선에 퀸이 존재하는지
-
-            if(checking(idx)) searching(idx + 1);
+    for(int i=0; i<n; i++){
+        if(vis1[i] || vis2[i+cnt] || vis3[cnt-i+n-1])
+            continue;
+        
+        vis1[i] = 1;
+        vis2[i+cnt] = 1;
+        vis3[cnt-i+n-1] = 1;
+        solution(cnt+1);
+        vis1[i] = 0;
+        vis2[i+cnt] = 0;
+        vis3[cnt-i+n-1] = 0;
     }
-
-
     return;
 }
 
-int main() {
-
+int main(void) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     cin >> n;
-    searching(0);
+    solution(0);
     cout << result << '\n';
-
     return 0;
 }
