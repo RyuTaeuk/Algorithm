@@ -1,24 +1,16 @@
-#include <string>
-#include <vector>
-#include <bitset>
+#include <iostream>
 
 using namespace std;
 
-unsigned long solution(int n) {
-    unsigned long answer;
-    // n을 2진수로 만들어 놓기
-    bitset<20> n_to_b(n);
-    // 1 개수 구하기
-    int cnt = n_to_b.count();
-    // 1씩 더하기
-    // 1의 갯수 같으면 스탑
-    while(true) {
-        bitset<20> next_big(++n);
-        if(next_big.count() == cnt) {
-            answer = next_big.to_ulong();
-            break;
-        }
-    }
-        
+int solution(int n) {
+    // 1. 가장 오른쪽 1의 위치 찾기
+    int c = n & -n;
+    
+    // 2. 1의 패턴에 1을 더해서 자리 올림 발생시키기
+    int r = n + c;
+    
+    // 3. 바뀐 부분의 1들을 맨 오른쪽으로 밀어서 붙이기
+    int answer = r | (((n ^ r) >> 2) / c);
+    
     return answer;
 }
