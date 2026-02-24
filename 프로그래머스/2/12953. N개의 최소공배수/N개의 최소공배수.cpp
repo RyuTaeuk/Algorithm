@@ -16,8 +16,8 @@ int getGCD(int a, int b) {
 }
 
 int solution(vector<int> arr) {
+    sort(arr.begin(), arr.end(), greater<int>());
     int answer = arr[0];
-    
     
     for(int i=1; i<arr.size(); i++) {
         int gcd = getGCD(answer, arr[i]);
