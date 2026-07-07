@@ -1,36 +1,19 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <map>
 
 using namespace std;
 
-int count = 0;
-char vowels[5] = {'A', 'E', 'I', 'O', 'U'};
-bool found = false;
-void DFS (string word, string curr_state) {
-    if(word == curr_state) {
-        found = true;
-        return;
-    }
-    count++;
-    if(curr_state.length() == 5) {
-        return;
-    }
-    //탐색
-    for(auto &c : vowels) {
-        curr_state = curr_state + c;
-        DFS(word, curr_state);
-        if(found) return;
-        //curr_state에서 하나 지우기는 어캐하지
-        curr_state.pop_back();
-    }
-    
-    
-}
-
 int solution(string word) {
-    DFS(word, "");
-    int answer = count;
-
+    int answer = 0;
+    int weight[] = {781, 156, 31, 6, 1};
+    map<char, int> m = {{'A', 0}, {'E', 1}, {'I', 2}, {'O', 3}, {'U', 4}};
+    
+    for (int i = 0; i < word.length(); i++) {
+        // (해당 알파벳의 인덱스 * 그 자리의 가중치) + 1(자기 자신)
+        answer += m[word[i]] * weight[i] + 1;
+    }
+    
     return answer;
 }
