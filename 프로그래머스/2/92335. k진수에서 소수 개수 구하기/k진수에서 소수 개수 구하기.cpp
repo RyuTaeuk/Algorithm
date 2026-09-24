@@ -18,7 +18,7 @@ string to_k_base(int n, int k) {
 
 bool isPrime(long long num) {
     if(num < 2) return false;
-    for(long long i = 2; i*i <= num; i++) {
+    for(long long i = 3; i*i <= num; i+=2) {
         if(num % i == 0) return false;
     }
     return true;
