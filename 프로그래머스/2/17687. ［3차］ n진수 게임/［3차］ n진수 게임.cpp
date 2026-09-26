@@ -10,14 +10,10 @@ using namespace std;
 // p, 2p, 3p... 번째
 string to_n_base(int n, int num) {
     string res = "";
+    const string digits = "0123456789ABCDEF";
     if (num == 0) return "0";
     while(num > 0) {
-        if(num % n > 9) {
-            res += 'A' + (num % n - 10);
-        }
-        else {
-            res += to_string(num % n);
-        }
+        res += digits[num % n];
         num /= n;
     }
     reverse(res.begin(), res.end());
