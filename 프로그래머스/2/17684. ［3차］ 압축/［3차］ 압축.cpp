@@ -17,18 +17,13 @@ vector<int> solution(string msg) {
     while(i < msg.size()) {
         int j = i;
         string str = "";
-        string next_str = "";
-        while(j < msg.size()) {
-            next_str += msg[j];
-            if(dict.find(next_str) == dict.end()) break;
-            j++;
-            str = next_str;
+        while(j < msg.size() && dict.find(str + msg[j]) != dict.end()) {
+            str += msg[j++];
         }
+        answer.push_back(dict[str]);
+        if (j< msg.size()) dict[str + msg[j]] = idx++;
         i += str.size();
         cout << str << '\n';
-        
-        answer.push_back(dict[str]);
-        if (j< msg.size()) dict[next_str] = idx++;
     }
     return answer;
 }
