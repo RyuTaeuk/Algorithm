@@ -18,16 +18,14 @@ bool isPrime(int num) {
 set<int> s;
 bool visited[8] = {false, };
 void dfs(string numbers, int value, int cnt) {
-    if(cnt == numbers.size()) {
-        if(value > 0) s.insert(value);
-        return;
-    }
+    if(value > 0) s.insert(value);
+    
+    if(cnt == numbers.size()) return;
     
     for(int i = 0; i<numbers.size(); i++) {
         if(!visited[i]) {
             visited[i] = true;
             dfs(numbers, value * 10 + (numbers[i] - '0'), cnt + 1);
-            dfs(numbers, value, cnt + 1); // 확인했으나 선택하지 않은 경우?
             visited[i] = false;
         }
     }
